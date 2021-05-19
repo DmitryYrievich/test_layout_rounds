@@ -1,23 +1,25 @@
 <template>
-  <div
-    class="buble pa"
-    :class="{ pulse: pulseAnimation, active: isActive }"
-    @click="isActive = !isActive"
-  >
-    <p class="buble-title">{{ title }}</p>
-    <p class="buble-text">{{ text }}</p>
-    <button
-      class="packs-open pa"
-      v-if="plusButtonVisible"
-      :class="{ swing: isShownContent }"
-      @click.stop.prevent="isShownContent = !isShownContent"
+  <div class="buble-wrapp pa">
+    <div
+      class="buble pa"
+      :class="{ pulse: pulseAnimation, active: isActive }"
+      @click="isActive = !isActive"
     >
-      <img
-        src="../assets/images/plus@2x.png"
-        alt="plus"
-        class="packs-open-img"
-      />
-    </button>
+      <p class="buble-title">{{ title }}</p>
+      <p class="buble-text">{{ text }}</p>
+      <button
+        class="packs-open pa"
+        v-if="plusButtonVisible"
+        :class="{ swing: isShownContent }"
+        @click.stop.prevent="isShownContent = !isShownContent"
+      >
+        <img
+          src="../assets/images/plus@2x.png"
+          alt="plus"
+          class="packs-open-img"
+        />
+      </button>
+    </div>
     <div class="packs-collection-container pa" v-if="isShownContent">
       <img
         v-for="(pack, index) in packsSrc"
@@ -44,7 +46,12 @@ export default {
       type: Boolean,
       default: false,
     },
-    packsSrc: [],
+    packsSrc: {
+      type: Array,
+      default: () => {
+        return [];
+      },
+    },
   },
   data() {
     return {
@@ -52,11 +59,18 @@ export default {
       isShownContent: false,
     };
   },
+  mounted() {
+    console.log(this.packsSrc);
+  },
 };
 </script>
 
 
 <style scoped>
+.buble-wrapp {
+  width: 150px;
+  height: 150px;
+}
 .buble {
   width: 150px;
   height: 150px;
@@ -128,6 +142,5 @@ export default {
   height: 350px;
   top: -92px;
   left: -105px;
-  transform: scale(1) !important;
 }
 </style>

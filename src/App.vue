@@ -21,6 +21,7 @@
       :title="title"
       :text="text"
       :plusButtonVisible="true"
+      :packsSrc="packsSrc"
     >
     </BubleRound>
   </div>
@@ -41,7 +42,11 @@ export default {
       title: "Phyto-pharmaceutical",
       text:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+      packsSrc: packsSrc,
     };
+  },
+  mounted() {
+    console.log(this.packsSrc);
   },
 };
 </script>
@@ -128,5 +133,4 @@ p {
   top: 351px;
   left: 200px;
 }
-
 </style>
