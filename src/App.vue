@@ -13,22 +13,54 @@
               >on the market.</span
             >
           </p>
+          <BubleRound
+            class="buble1"
+            :title="title1"
+            :text="text1"
+            :plusButtonVisible="true"
+            :packsSrc="packsSrc"
+          >
+          </BubleRound>
+        </div>
+        <div class="content-box-right pa">
+          <p class="box-title box-title2 pa">
+            Categories of herbal products<br /><span class="wite-text"
+              >on the market.</span
+            >
+          </p>
+          <transition>
+            <div class="buble-box pa" refs="bubleBox">
+              <BubleRound
+                @click="toggleItem(index)"
+                v-for="(buble, index) in 5"
+                :key="index"
+                :class="[
+                  `buble${index + 2}`,
+                  { activeOnPage: activeElement === index },
+                ]"
+                :title="title1"
+                :text="text1"
+              >
+                {{ buble }}
+              </BubleRound>
+            </div>
+          </transition>
         </div>
       </div>
     </div>
-    <BubleRound
-      class="buble1"
-      :title="title"
-      :text="text"
-      :plusButtonVisible="true"
-      :packsSrc="packsSrc"
-    >
-    </BubleRound>
   </div>
 </template>
 
 <script>
 import "@/assets/css/font.css";
+
+import pack1 from "./assets/images/packshot01@2x.png";
+import pack2 from "./assets/images/packshot02@2x.png";
+import pack3 from "./assets/images/packshot03@2x.png";
+import pack4 from "./assets/images/packshot04@2x.png";
+import pack5 from "./assets/images/packshot05@2x.png";
+import pack6 from "./assets/images/packshot06@2x.png";
+import pack7 from "./assets/images/packshot07@2x.png";
 
 import BubleRound from "./components/BubleRound.vue";
 
@@ -39,14 +71,21 @@ export default {
   },
   data() {
     return {
-      title: "Phyto-pharmaceutical",
-      text:
+      activeElement: null,
+      title1: "Phyto-pharmaceutical",
+      text1:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-      packsSrc: packsSrc,
+      packsSrc: [pack1, pack2, pack3, pack4, pack5, pack6, pack7],
     };
   },
   mounted() {
-    console.log(this.packsSrc);
+    console.log(this.$refs.buble);
+  },
+  methods: {
+    toggleItem(index) {
+      this.activeElement = index;
+      console.log(index);
+    },
   },
 };
 </script>
@@ -130,7 +169,81 @@ p {
   font-size: 20px;
 }
 .buble1 {
-  top: 351px;
-  left: 200px;
+  top: 162px;
+  left: 121px;
+}
+#packs-images1 {
+  left: 72px;
+  top: 2px;
+}
+#packs-images2 {
+  left: 256px;
+  top: 2px;
+}
+#packs-images3 {
+  left: 322px;
+  top: 122px;
+}
+#packs-images4 {
+  left: 292px;
+  top: 242px;
+}
+#packs-images5 {
+  left: 169px;
+  top: 284px;
+}
+#packs-images6 {
+  left: 33px;
+  top: 242px;
+}
+#packs-images7 {
+  left: 7px;
+  top: 112px;
+}
+.content-box-right {
+  width: 450px;
+  height: 495px;
+  top: 36px;
+  left: 448px;
+}
+.box-title2 {
+  top: 15px;
+  left: 53px;
+}
+.buble2 {
+  top: 7px;
+  left: 4px;
+}
+.buble3 {
+  top: 66px;
+  left: 149px;
+}
+.buble4 {
+  top: 7px;
+  left: 295px;
+}
+.buble5 {
+  top: 177px;
+  left: 33px;
+}
+.buble6 {
+  top: 177px;
+  left: 264px;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 6.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+.buble-box {
+  width: 450px;
+  height: 337px;
+  top: 103px;
+}
+.active-on-page {
+  scale: 2;
 }
 </style>

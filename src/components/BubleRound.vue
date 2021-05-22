@@ -1,5 +1,5 @@
 <template>
-  <div class="buble-wrapp pa">
+  <div class="buble-wrapp pa" refs="buble">
     <div
       class="buble pa"
       :class="{ pulse: pulseAnimation, active: isActive }"
@@ -20,15 +20,18 @@
         />
       </button>
     </div>
-    <div class="packs-collection-container pa" v-if="isShownContent">
-      <img
-        v-for="(pack, index) in packsSrc"
-        :key="index"
-        :src="`${pack}`"
-        alt="plus"
-        class="packs-open-img"
-      />
-    </div>
+    <transition name="fade">
+      <div class="packs-collection-container pa" v-if="isShownContent">
+        <img
+          v-for="(pack, index) in packsSrc"
+          :key="index"
+          :src="`${pack}`"
+          alt="plus"
+          class="packs-images pa"
+          :id="`packs-images${index + 1}`"
+        />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -55,12 +58,12 @@ export default {
   },
   data() {
     return {
-      isActive: false,
       isShownContent: false,
+      isActive: false,
     };
   },
   mounted() {
-    console.log(this.packsSrc);
+    console.log(this.$refs.buble);
   },
 };
 </script>
@@ -120,6 +123,14 @@ export default {
     box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
   }
 }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 .packs-open-img,
 .packs-open {
   width: 25px;
@@ -132,15 +143,19 @@ export default {
   top: 2px;
   left: 101px;
   z-index: 2;
-  transition: 0.3s transform;
 }
 .packs-open.swing {
   transform: rotate(-45deg);
 }
 .packs-collection-container {
-  width: 350px;
-  height: 350px;
-  top: -92px;
-  left: -105px;
+  width: 411px;
+  height: 355px;
+  top: -94px;
+  left: -129px;
+  pointer-events: none;
+}
+.packs-images {
+  width: 81px;
+  height: 72px;
 }
 </style>
