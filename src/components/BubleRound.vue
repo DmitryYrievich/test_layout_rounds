@@ -1,8 +1,9 @@
 <template>
-  <div class="buble-wrapp pa" refs="buble">
+  <div class="buble-wrapp pa">
     <div
+      ref="buble"
       class="buble pa"
-      :class="{ pulse: pulseAnimation, active: isActive }"
+      :class="{ pulse: pulseAnimation && !isActive, active: isActive }"
       @click="isActive = !isActive"
     >
       <p class="buble-title">{{ title }}</p>
@@ -62,8 +63,26 @@ export default {
       isActive: false,
     };
   },
+  methods: {
+    // apendActive() {
+    //   if (this.pulseAnimation === false) {
+    //     this.isActive = false;
+    //     this.pulseAnimation = true;
+    //   } else {
+    //     (this.isActive = true), (this.pulseAnimation = false);
+    //   }
+    // },
+  },
   mounted() {
-    console.log(this.$refs.buble);
+    const bublesQuantity = this.$refs.buble;
+    console.log(bublesQuantity);
+
+    let arr = [];
+    for (let i = 0; i < 6; i++) {
+      arr.push(bublesQuantity);
+    }
+
+    console.log(arr);
   },
 };
 </script>
@@ -92,7 +111,7 @@ export default {
   transform: scale3d(1.5, 1.5, 1.5);
   background: rgba(0, 0, 0, 0.7);
   border-radius: 100%;
-  animation: none;
+  z-index: 1;
 }
 .buble-title {
   font-size: 16px;

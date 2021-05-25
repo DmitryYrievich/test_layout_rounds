@@ -1,11 +1,14 @@
 <template>
   <div class="app pa" id="app">
     <div class="main-container pa" id="main-container">
+      <div class="dark-bg pa" id="dark-bg"></div>
+
       <div class="tab-title pa" id="tab-title">
         <p class="tab-title-text pa">
           <strong>Phyto = Phyto?</strong> Herbal products are not equal
         </p>
       </div>
+
       <div class="content-box pa">
         <div class="content-box-left pa">
           <p class="box-title box-title1 pa">
@@ -28,23 +31,19 @@
               >on the market.</span
             >
           </p>
-          <transition>
-            <div class="buble-box pa" refs="bubleBox">
-              <BubleRound
-                @click="toggleItem(index)"
-                v-for="(buble, index) in 5"
-                :key="index"
-                :class="[
-                  `buble${index + 2}`,
-                  { activeOnPage: activeElement === index },
-                ]"
-                :title="title1"
-                :text="text1"
-              >
-                {{ buble }}
-              </BubleRound>
-            </div>
-          </transition>
+          <div class="buble-box pa" refs="bubleBox">
+            <BubleRound
+              @click.native="toggleItem(index)"
+              v-for="(buble, index) in 5"
+              :key="index"
+              :class="`buble${index + 2}`"
+              :title="title1"
+              :text="text1"
+            >
+              {{ buble }}
+
+            </BubleRound>
+          </div>
         </div>
       </div>
     </div>
@@ -120,15 +119,16 @@ p {
   height: 652px;
   top: 54px;
   bottom: 62px;
-  background: rgba(0, 0, 0, 0.5);
 }
 .tab-title {
   width: 952px;
   height: 79px;
   background: rgba(255, 255, 255, 0.8);
   border-radius: 11px 11px 0;
-  top: 20px;
+  top: 551px;
   left: 41px;
+  opacity: 0;
+  animation: fadeAndMove 2s ease-out 1s forwards;
 }
 .tab-title-text {
   font-weight: 300;
@@ -159,6 +159,8 @@ p {
   color: #97bf0d;
   letter-spacing: 0.6px;
   line-height: 1;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out 3s forwards;
 }
 .box-title1 {
   top: 15px;
@@ -171,6 +173,8 @@ p {
 .buble1 {
   top: 162px;
   left: 121px;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out 5s forwards;
 }
 #packs-images1 {
   left: 72px;
@@ -242,8 +246,37 @@ p {
   width: 450px;
   height: 337px;
   top: 103px;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out 4s forwards;
 }
-.active-on-page {
-  scale: 2;
+.dark-bg {
+  width: 1024px;
+  height: 652px;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out 3s forwards;
+}
+.appear-big-tab {
+  width: 10px;
+}
+@keyframes fadeAndMove {
+  0% {
+    opacity: 0.3;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, -530px);
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>
